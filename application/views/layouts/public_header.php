@@ -22,26 +22,40 @@
 
         body {
             background: radial-gradient(700px circle at 50% -10%, rgba(37, 99, 235, .08), transparent 60%), #eef1f6;
-            padding: 20px 0 40px;
+            padding: 16px 0 40px;
         }
 
+        /* Responsive Paper Document - Optimized for Tablet / iPad Full Width */
         .paper-document {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 1px 3px rgba(15, 23, 42, .06), 0 12px 32px rgba(15, 23, 42, .08);
             border: 1px solid var(--rs-border);
             padding: 32px;
-            max-width: 1150px;
+            max-width: 1320px;
+            width: 100%;
             margin: 0 auto;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1199.98px) {
             body {
-                padding: 8px 0 24px;
+                padding: 10px 0 24px;
             }
 
             .paper-document {
-                padding: 16px;
+                padding: 24px 20px;
+                border-radius: 14px;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            body {
+                padding: 6px 0 20px;
+            }
+
+            .paper-document {
+                padding: 16px 12px;
                 border-radius: 12px;
             }
         }
@@ -127,11 +141,13 @@
             touch-action: none;
         }
 
+        /* Touch Friendly Form Controls for Tablet/iPad */
         .form-control, .form-select {
             border: 1px solid #cbd5e1;
             border-radius: 10px;
             padding: 10px 14px;
             font-size: .95rem;
+            min-height: 44px;
         }
 
         .form-control:focus, .form-select:focus {
@@ -142,9 +158,14 @@
         .status-btn-group .btn {
             font-size: .8rem;
             font-weight: 600;
-            padding: 6px 10px;
+            padding: 8px 12px;
             border-radius: 8px;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .status-btn-group .btn-check:checked + .btn-outline-success {
             background-color: #16a34a !important; color: #fff !important;
         }
@@ -181,4 +202,4 @@
 </head>
 <body>
 
-<div class="container-fluid px-2 px-sm-3">
+<div class="container-fluid px-1 px-md-3">

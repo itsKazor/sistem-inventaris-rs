@@ -1,5 +1,5 @@
 <?php if ($this->session->flashdata('error')): ?>
-    <div class="alert alert-danger alert-dismissible fade show mb-4 mx-auto" style="max-width: 1150px;" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show mb-4 mx-auto" style="max-width: 1320px;" role="alert">
         <i class="bi bi-exclamation-triangle-fill fs-5 me-2 align-middle"></i>
         <span><?= html_escape($this->session->flashdata('error')) ?></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -167,7 +167,7 @@
 
         <div class="row g-3 mb-4">
             <!-- TTD Menyerahkan -->
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menyerahkan <span class="text-danger">*</span></div>
                     <div class="text-muted small mb-2">(Petugas Shift Lama)</div>
@@ -180,7 +180,7 @@
             </div>
 
             <!-- TTD Menerima -->
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menerima <span class="text-danger">*</span></div>
                     <div class="text-muted small mb-2">(Petugas Shift Baru)</div>
@@ -193,7 +193,7 @@
             </div>
 
             <!-- TTD Mengetahui (Optional) -->
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Mengetahui <span class="text-muted fw-normal">(Optional)</span></div>
                     <div class="text-muted small mb-2">(Kepala Ruangan / Supervisor)</div>
