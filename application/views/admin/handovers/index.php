@@ -59,14 +59,14 @@
             <table class="table table-hover align-middle mb-0" style="font-size: .92rem;">
                 <thead class="table-light">
                     <tr>
-                        <th width="40" class="text-center">No.</th>
-                        <th>Nomor Serah Terima</th>
-                        <th>Tanggal & Waktu</th>
-                        <th>Ruang & Kamar</th>
-                        <th>Penyerah ➔ Penerima</th>
-                        <th class="text-center">Temuan Masalah</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center" width="220">Aksi Dokumen</th>
+                        <th style="width: 50px;" class="text-center">No.</th>
+                        <th style="width: 180px;">Nomor Serah Terima</th>
+                        <th style="width: 150px;">Tanggal & Waktu</th>
+                        <th style="width: 180px;">Ruang & Kamar</th>
+                        <th style="min-width: 180px;">Penyerah ➔ Penerima</th>
+                        <th style="width: 140px;" class="text-center">Temuan Masalah</th>
+                        <th style="width: 120px;" class="text-center">Status</th>
+                        <th style="width: 220px;" class="text-end">Aksi Dokumen</th>
                     </tr>
                 </thead>
                 <tbody>

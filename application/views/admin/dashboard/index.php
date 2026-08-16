@@ -94,13 +94,13 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
                     <thead>
-                        <tr>
-                            <th>No. Dokumen</th>
-                            <th>Ruangan / Kamar</th>
-                            <th>Penyerah</th>
-                            <th>Penerima</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
+                        <tr class="table-light">
+                            <th style="width: 170px;">No. Dokumen</th>
+                            <th style="width: 160px;">Ruangan / Kamar</th>
+                            <th style="min-width: 120px;">Penyerah</th>
+                            <th style="min-width: 120px;">Penerima</th>
+                            <th style="width: 110px;" class="text-center">Status</th>
+                            <th style="width: 100px;" class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

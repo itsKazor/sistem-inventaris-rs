@@ -47,11 +47,11 @@
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0" style="font-size: .9rem;">
             <thead>
-                <tr>
-                    <th width="40" class="text-center">No.</th>
-                    <th>Nama Barang</th>
-                    <th>Status / Kondisi</th>
-                    <th class="text-center">Jumlah Temuan</th>
+                <tr class="table-light">
+                    <th style="width: 60px;" class="text-center">No.</th>
+                    <th style="width: 50%; min-width: 220px;">Nama Barang</th>
+                    <th style="width: 25%; min-width: 160px;">Status / Kondisi</th>
+                    <th style="width: 180px;" class="text-center">Jumlah Temuan</th>
                 </tr>
             </thead>
             <tbody>

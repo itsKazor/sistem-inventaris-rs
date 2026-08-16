@@ -16,8 +16,8 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th>Nama Barang</th>
-                        <th>Satuan</th>
+                        <th style="min-width: 250px;">Nama Barang</th>
+                        <th style="width: 140px;">Satuan</th>
                         <th style="width: 180px;" class="text-center">Kuantitas Standar</th>
                     </tr>
                 </thead>

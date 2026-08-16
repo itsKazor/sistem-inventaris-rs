@@ -13,11 +13,11 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th style="width: 80px;">Urutan</th>
-                    <th>Nama Barang</th>
-                    <th>Satuan</th>
-                    <th>Status</th>
-                    <th class="text-end">Aksi</th>
+                    <th style="width: 80px;" class="text-center">Urutan</th>
+                    <th style="width: 45%; min-width: 200px;">Nama Barang</th>
+                    <th style="width: 20%; min-width: 120px;">Satuan</th>
+                    <th style="width: 15%; min-width: 100px;">Status</th>
+                    <th style="width: 180px;" class="text-end">Aksi</th>
                 </tr>
             </thead>
             <tbody>

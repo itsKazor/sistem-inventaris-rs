@@ -10,9 +10,9 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Ruangan</th>
-                    <th>Nama Kamar</th>
-                    <th class="text-end">Aksi Setup</th>
+                    <th style="width: 25%; min-width: 160px;">Ruangan</th>
+                    <th style="width: 35%; min-width: 180px;">Nama Kamar</th>
+                    <th style="width: 200px;" class="text-end">Aksi Setup</th>
                 </tr>
             </thead>
             <tbody>
