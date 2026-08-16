@@ -314,16 +314,16 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="card mb-4 border">
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-bordered align-middle mb-0" style="font-size: .9rem;">
+                        <table class="table table-bordered align-middle mb-0" style="font-size: .88rem; width: 100%;">
                             <thead>
-                                <tr>
+                                <tr class="table-light">
                                     <th width="40" class="text-center">No</th>
-                                    <th>Nama Inventaris</th>
-                                    <th width="90" class="text-center">Standar</th>
-                                    <th width="110" class="text-center">Aktual</th>
-                                    <th width="100" class="text-center">Selisih</th>
-                                    <th width="320" class="text-center">Kondisi Fisik</th>
-                                    <th>Keterangan / Catatan</th>
+                                    <th style="min-width: 140px;">Nama Inventaris</th>
+                                    <th width="80" class="text-center">Standar</th>
+                                    <th width="90" class="text-center">Aktual</th>
+                                    <th width="90" class="text-center">Selisih</th>
+                                    <th style="width: 280px; min-width: 270px;" class="text-center">Kondisi Fisik</th>
+                                    <th style="min-width: 180px;">Keterangan / Catatan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -345,28 +345,28 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="text-center font-monospace fw-bold"><span class="badge bg-light text-dark border">${stdQty} ${invUnit}</span></td>
                         <td class="text-center p-1">
                             <input type="number" min="0" class="form-control form-control-sm text-center fw-bold actual-input" 
-                                name="actual_quantity[${itemId}]" data-std="${stdQty}" data-item-id="${itemId}" value="${stdQty}" required>
+                                name="actual_quantity[${itemId}]" data-std="${stdQty}" data-item-id="${itemId}" value="${stdQty}" required style="min-height:36px;">
                         </td>
                         <td class="text-center" id="diff_badge_${itemId}">
                             <span class="badge bg-success-subtle text-success border border-success-subtle">Sesuai</span>
                         </td>
                         <td class="p-1">
-                            <div class="status-btn-group d-flex gap-1 justify-content-center flex-wrap">
+                            <div class="status-btn-group">
                                 <input type="radio" class="btn-check status-radio" name="condition[${itemId}]" id="cond_good_${itemId}" value="good" data-item-id="${itemId}" checked required>
-                                <label class="btn btn-outline-success btn-sm" for="cond_good_${itemId}">Baik</label>
+                                <label class="btn btn-outline-success" for="cond_good_${itemId}">Baik</label>
 
                                 <input type="radio" class="btn-check status-radio" name="condition[${itemId}]" id="cond_damaged_${itemId}" value="damaged" data-item-id="${itemId}">
-                                <label class="btn btn-outline-danger btn-sm" for="cond_damaged_${itemId}">Rusak</label>
+                                <label class="btn btn-outline-danger" for="cond_damaged_${itemId}">Rusak</label>
 
                                 <input type="radio" class="btn-check status-radio" name="condition[${itemId}]" id="cond_repair_${itemId}" value="need_repair" data-item-id="${itemId}">
-                                <label class="btn btn-outline-warning btn-sm" for="cond_repair_${itemId}">Perbaikan</label>
+                                <label class="btn btn-outline-warning" for="cond_repair_${itemId}">Perbaikan</label>
 
                                 <input type="radio" class="btn-check status-radio" name="condition[${itemId}]" id="cond_shortage_${itemId}" value="shortage" data-item-id="${itemId}">
-                                <label class="btn btn-outline-secondary btn-sm" for="cond_shortage_${itemId}">Kurang</label>
+                                <label class="btn btn-outline-secondary" for="cond_shortage_${itemId}">Kurang</label>
                             </div>
                         </td>
-                        <td>
-                            <input type="text" class="form-control form-control-sm note-input" name="inventory_notes[${itemId}]" id="note_input_${itemId}" placeholder="Catatan jika ada masalah...">
+                        <td class="p-1">
+                            <input type="text" class="form-control form-control-sm note-input" name="inventory_notes[${itemId}]" id="note_input_${itemId}" placeholder="Catatan jika ada masalah..." style="min-height:36px;">
                         </td>
                     </tr>
                 `;

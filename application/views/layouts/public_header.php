@@ -155,15 +155,24 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
         }
 
+        .status-btn-group {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 3px;
+            width: 100%;
+        }
+
         .status-btn-group .btn {
-            font-size: .8rem;
+            font-size: .75rem;
             font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 8px;
-            min-height: 40px;
+            padding: 5px 6px;
+            border-radius: 6px;
+            white-space: nowrap;
+            flex: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
 
         .status-btn-group .btn-check:checked + .btn-outline-success {
