@@ -18,6 +18,7 @@ $route['api/room-numbers/(:num)/inventories'] = 'api/get_room_inventories/$1';
 $route['admin'] = 'admin/auth/login';
 $route['admin/login'] = 'admin/auth/login';
 $route['admin/logout'] = 'admin/auth/logout';
+$route['admin/change-password'] = 'admin/profile/index';
 $route['admin/profile'] = 'admin/profile/index';
 $route['admin/profile/update'] = 'admin/profile/update';
 $route['admin/dashboard'] = 'admin/dashboard/index';

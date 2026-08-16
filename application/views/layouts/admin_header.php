@@ -58,8 +58,8 @@
         </a>
 
         <div class="sidebar-heading">Akun</div>
-        <a href="<?= base_url('admin/profile') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
-            <i class="bi bi-person-gear"></i> Pengaturan Profil
+        <a href="<?= base_url('admin/change-password') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'change-password' || $this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
+            <i class="bi bi-key"></i> Ganti Password
         </a>
         <a href="<?= base_url('admin/logout') ?>" class="nav-link-custom text-danger">
             <i class="bi bi-box-arrow-right"></i> Logout
@@ -93,7 +93,7 @@
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
                     <li><span class="dropdown-item-text text-muted small">Role: Administrator</span></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<?= base_url('admin/profile') ?>"><i class="bi bi-person-gear me-2"></i> Pengaturan Profil</a></li>
+                    <li><a class="dropdown-item" href="<?= base_url('admin/change-password') ?>"><i class="bi bi-key me-2"></i> Ganti Password</a></li>
                     <li><a class="dropdown-item text-danger" href="<?= base_url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                 </ul>
             </div>
@@ -140,8 +140,8 @@
                     <i class="bi bi-exclamation-triangle-fill"></i> Laporan Masalah
                 </a>
                 <div class="sidebar-heading">Akun</div>
-                <a href="<?= base_url('admin/profile') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
-                    <i class="bi bi-person-gear"></i> Pengaturan Profil
+                <a href="<?= base_url('admin/change-password') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'change-password' || $this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
+                    <i class="bi bi-key"></i> Ganti Password
                 </a>
                 <a href="<?= base_url('admin/logout') ?>" class="nav-link-custom text-danger">
                     <i class="bi bi-box-arrow-right"></i> Logout
