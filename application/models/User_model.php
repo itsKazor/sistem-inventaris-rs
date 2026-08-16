@@ -21,4 +21,18 @@ class User_model extends CI_Model {
         }
         return false;
     }
+
+    public function check_username_exists($username, $exclude_id = null) {
+        $this->db->where('username', $username);
+        if ($exclude_id) {
+            $this->db->where('id !=', $exclude_id);
+        }
+        return $this->db->count_all_results('users') > 0;
+    }
+
+    public function update($id, $data) {
+        $data['updated_at'] = date('Y-m-d H:i:s');
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
+    }
 }
