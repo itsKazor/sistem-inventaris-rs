@@ -100,7 +100,7 @@
                             <th style="min-width: 120px;">Penyerah</th>
                             <th style="min-width: 120px;">Penerima</th>
                             <th style="width: 110px;" class="text-center">Status</th>
-                            <th style="width: 100px;" class="text-center">Aksi</th>
+                            <th style="width: 175px;" class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,9 +122,17 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="<?= base_url('admin/handovers/show/' . $h['id']) ?>" class="btn btn-sm btn-outline-primary" style="font-size: .78rem;">
-                                            <i class="bi bi-eye me-1"></i> Detail
-                                        </a>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="<?= base_url('admin/handovers/show/' . $h['id']) ?>" class="btn btn-outline-primary" style="font-size: .78rem;" title="Detail Transaksi">
+                                                <i class="bi bi-eye"></i> Detail
+                                            </a>
+                                            <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>" target="_blank" class="btn btn-outline-secondary" style="font-size: .78rem;" title="Pratinjau Full Page PDF">
+                                                <i class="bi bi-file-earmark-pdf"></i> Preview
+                                            </a>
+                                            <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>?print=1" target="_blank" class="btn btn-dark" style="font-size: .78rem;" title="Cetak / Print Dokumen A4">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

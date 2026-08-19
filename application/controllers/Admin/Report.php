@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Report extends Admin_Controller {
+class Report extends AdminOnly_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Handover_model');

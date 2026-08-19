@@ -324,13 +324,13 @@ $condLabels = array(
             </tr>
             <tr>
                 <td>
-                    <div class="field-label">Nama Lengkap Petugas</div>
+                    <div class="field-label">Nama Lengkap Penyerah</div>
                     <div class="field-value"><?= html_escape($handover['sender_name']) ?></div>
                     <div class="field-label">Jabatan / Role</div>
                     <div class="field-value"><?= html_escape($handover['sender_position']) ?: '-' ?></div>
                 </td>
                 <td>
-                    <div class="field-label">Nama Lengkap Petugas</div>
+                    <div class="field-label">Nama Lengkap Penerima</div>
                     <div class="field-value"><?= html_escape($handover['receiver_name']) ?></div>
                     <div class="field-label">Jabatan / Role</div>
                     <div class="field-value"><?= html_escape($handover['receiver_position']) ?: '-' ?></div>
@@ -386,7 +386,7 @@ $condLabels = array(
         <div class="ttd-grid">
             <div class="ttd-col">
                 <div class="ttd-role">Pihak Menyerahkan</div>
-                <div class="ttd-sub">(Petugas Shift Lama)</div>
+                <div class="ttd-sub">(Penyerah)</div>
                 <div class="sig-box">
                     <?php if (!empty($handover['sender_signature_path']) && file_exists(FCPATH . ltrim($handover['sender_signature_path'], '/\\'))): ?>
                         <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/sender') ?>" alt="TTD Sender">
@@ -397,7 +397,7 @@ $condLabels = array(
             </div>
             <div class="ttd-col">
                 <div class="ttd-role">Pihak Menerima</div>
-                <div class="ttd-sub">(Petugas Shift Baru)</div>
+                <div class="ttd-sub">(Penerima)</div>
                 <div class="sig-box">
                     <?php if (!empty($handover['receiver_signature_path']) && file_exists(FCPATH . ltrim($handover['receiver_signature_path'], '/\\'))): ?>
                         <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/receiver') ?>" alt="TTD Receiver">
@@ -448,6 +448,11 @@ $condLabels = array(
             
             <!-- PROMINENT ACTION BUTTONS -->
             <div class="d-flex align-items-center gap-2 flex-wrap">
+                <!-- PREVIEW PDF BUTTON -->
+                <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>" target="_blank" class="btn btn-secondary btn-md px-3 py-2 fw-bold shadow-sm">
+                    <i class="bi bi-file-earmark-pdf-fill me-1 fs-5 align-middle text-warning"></i> Preview PDF
+                </a>
+
                 <!-- PRINT BUTTON -->
                 <button onclick="window.print()" class="btn btn-dark btn-md px-3 py-2 fw-bold shadow-sm">
                     <i class="bi bi-printer-fill me-2 fs-5 align-middle"></i> Cetak / Print Dokumen A4

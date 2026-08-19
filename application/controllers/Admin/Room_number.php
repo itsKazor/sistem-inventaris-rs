@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Room_number extends Admin_Controller {
+class Room_number extends AdminOnly_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Room_number_model');

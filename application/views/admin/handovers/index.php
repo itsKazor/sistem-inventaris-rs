@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
     <div>
         <h4 class="fw-bold mb-1"><i class="bi bi-file-earmark-text text-primary me-2"></i>Daftar Transaksi Serah Terima</h4>
-        <p class="text-muted mb-0">Riwayat seluruh transaksi serah terima kamar yang telah disubmit oleh petugas perawat.</p>
+        <p class="text-muted mb-0">Riwayat seluruh transaksi serah terima kamar yang telah disubmit.</p>
     </div>
 </div>
 
@@ -10,8 +10,8 @@
     <div class="card-body">
         <form action="<?= base_url('admin/handovers') ?>" method="get" class="row g-3">
             <div class="col-md-3">
-                <label class="form-label fw-semibold">Cari Nomor / Petugas</label>
-                <input type="text" class="form-control form-control-sm" name="search" value="<?= html_escape(isset($filters['search']) ? $filters['search'] : '') ?>" placeholder="STR-... / nama perawat">
+                <label class="form-label fw-semibold">Cari Nomor / Penyerah / Penerima</label>
+                <input type="text" class="form-control form-control-sm" name="search" value="<?= html_escape(isset($filters['search']) ? $filters['search'] : '') ?>" placeholder="STR-... / nama penyerah / penerima">
             </div>
 
             <div class="col-md-2">
@@ -116,8 +116,13 @@
                                             <i class="bi bi-eye me-1"></i> Detail
                                         </a>
 
+                                        <!-- PREVIEW BUTTON -->
+                                        <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>" target="_blank" class="btn btn-secondary fw-semibold" title="Pratinjau Full Page PDF">
+                                            <i class="bi bi-file-earmark-pdf me-1"></i> Preview
+                                        </a>
+
                                         <!-- PRINT BUTTON -->
-                                        <a href="<?= base_url('admin/handovers/show/' . $h['id']) ?>?print=1" target="_blank" class="btn btn-dark fw-semibold" title="Cetak Dokumen A4">
+                                        <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>?print=1" target="_blank" class="btn btn-dark fw-semibold" title="Cetak Dokumen A4">
                                             <i class="bi bi-printer me-1"></i> Print
                                         </a>
 

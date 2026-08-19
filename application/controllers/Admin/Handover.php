@@ -56,6 +56,18 @@ class Handover extends Admin_Controller {
         $this->load->view('layouts/admin_footer', $data);
     }
 
+    public function preview($id) {
+        $data['handover'] = $this->Handover_model->get_by_id($id);
+        if (!$data['handover']) {
+            show_404();
+        }
+
+        $data['items'] = isset($data['handover']['items']) ? $data['handover']['items'] : array();
+        $data['title'] = 'Pratinjau Dokumen: ' . $data['handover']['handover_number'];
+
+        $this->load->view('admin/handovers/preview', $data);
+    }
+
     public function review($id) {
         $handover = $this->Handover_model->get_by_id($id);
         if (!$handover) {

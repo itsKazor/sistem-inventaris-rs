@@ -21,15 +21,20 @@
                 <span class="fw-semibold text-dark"><?= html_escape($handover['room_name']) ?> (<?= html_escape($handover['room_number_name']) ?>)</span>
             </div>
             <div class="col-sm-6">
-                <small class="text-muted d-block">Petugas Involved</small>
+                <small class="text-muted d-block">Penyerah &amp; Penerima</small>
                 <span class="fw-semibold text-dark"><?= html_escape($handover['sender_name']) ?> ➔ <?= html_escape($handover['receiver_name']) ?></span>
             </div>
         </div>
     </div>
 
     <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <!-- PREVIEW BUTTON -->
+        <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>" target="_blank" class="btn btn-secondary btn-lg px-4 py-3 fw-bold shadow">
+            <i class="bi bi-file-earmark-pdf me-2 fs-5 align-middle text-warning"></i> Preview Dokumen PDF
+        </a>
+
         <!-- PRINT BUTTON -->
-        <a href="<?= base_url('admin/handovers/show/' . $handover['id']) ?>?print=1" target="_blank" class="btn btn-dark btn-lg px-4 py-3 fw-bold shadow">
+        <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>?print=1" target="_blank" class="btn btn-dark btn-lg px-4 py-3 fw-bold shadow">
             <i class="bi bi-printer me-2 fs-5 align-middle"></i> Cetak / Print Bukti A4
         </a>
 

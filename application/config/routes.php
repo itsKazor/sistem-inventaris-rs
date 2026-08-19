@@ -18,14 +18,19 @@ $route['api/room-numbers/(:num)/inventories'] = 'api/get_room_inventories/$1';
 $route['admin'] = 'admin/auth/login';
 $route['admin/login'] = 'admin/auth/login';
 $route['admin/logout'] = 'admin/auth/logout';
-$route['admin/change-password'] = 'admin/profile/index';
-$route['admin/profile'] = 'admin/profile/index';
-$route['admin/profile/update'] = 'admin/profile/update';
 $route['admin/dashboard'] = 'admin/dashboard/index';
+
+$route['admin/users'] = 'admin/users/index';
+$route['admin/users/store'] = 'admin/users/store';
+$route['admin/users/update/(:num)'] = 'admin/users/update/$1';
+$route['admin/users/reset_password/(:num)'] = 'admin/users/reset_password/$1';
+$route['admin/users/delete/(:num)'] = 'admin/users/delete/$1';
 
 $route['admin/handovers'] = 'admin/handover/index';
 $route['admin/handovers/(:num)'] = 'admin/handover/show/$1';
 $route['admin/handovers/show/(:num)'] = 'admin/handover/show/$1';
+$route['admin/handovers/preview/(:num)'] = 'admin/handover/preview/$1';
+$route['admin/handovers/(:num)/preview'] = 'admin/handover/preview/$1';
 $route['admin/handovers/review/(:num)'] = 'admin/handover/review/$1';
 $route['admin/handovers/(:num)/review'] = 'admin/handover/review/$1';
 $route['admin/handovers/delete/(:num)'] = 'admin/handover/delete/$1';

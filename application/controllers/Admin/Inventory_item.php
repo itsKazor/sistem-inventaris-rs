@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inventory_item extends Admin_Controller {
+class Inventory_item extends AdminOnly_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Inventory_item_model');

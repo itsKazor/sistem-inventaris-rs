@@ -69,22 +69,22 @@
                 <tr>
                     <td class="p-3">
                         <div class="mb-3">
-                            <label class="form-label mb-1">Nama Lengkap Petugas <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" name="sender_name" placeholder="Nama petugas penyerah" required>
+                            <label class="form-label mb-1">Nama Lengkap Penyerah <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" name="sender_name" placeholder="Nama penyerah" required>
                         </div>
                         <div>
                             <label class="form-label mb-1 text-muted">Jabatan / Role (Optional)</label>
-                            <input type="text" class="form-control form-control-sm" name="sender_position" placeholder="Contoh: Perawat Shift Pagi / Katim">
+                            <input type="text" class="form-control form-control-sm" name="sender_position" placeholder="Contoh: Shift Pagi / Katim">
                         </div>
                     </td>
                     <td class="p-3">
                         <div class="mb-3">
-                            <label class="form-label mb-1">Nama Lengkap Petugas <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" name="receiver_name" placeholder="Nama petugas penerima" required>
+                            <label class="form-label mb-1">Nama Lengkap Penerima <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" name="receiver_name" placeholder="Nama penerima" required>
                         </div>
                         <div>
                             <label class="form-label mb-1 text-muted">Jabatan / Role (Optional)</label>
-                            <input type="text" class="form-control form-control-sm" name="receiver_position" placeholder="Contoh: Perawat Shift Sore">
+                            <input type="text" class="form-control form-control-sm" name="receiver_position" placeholder="Contoh: Shift Sore">
                         </div>
                     </td>
                 </tr>
@@ -170,7 +170,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menyerahkan <span class="text-danger">*</span></div>
-                    <div class="text-muted small mb-2">(Petugas Shift Lama)</div>
+                    <div class="text-muted small mb-2">(Penyerah)</div>
                     <div class="signature-box flex-grow-1 mb-2" style="min-height: 140px;">
                         <canvas id="sigCanvasSender" class="sig-canvas" style="width:100%; height:140px;"></canvas>
                     </div>
@@ -183,7 +183,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menerima <span class="text-danger">*</span></div>
-                    <div class="text-muted small mb-2">(Petugas Shift Baru)</div>
+                    <div class="text-muted small mb-2">(Penerima)</div>
                     <div class="signature-box flex-grow-1 mb-2" style="min-height: 140px;">
                         <canvas id="sigCanvasReceiver" class="sig-canvas" style="width:100%; height:140px;"></canvas>
                     </div>
@@ -196,7 +196,7 @@
             <div class="col-lg-4 col-md-12">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Mengetahui <span class="text-muted fw-normal">(Optional)</span></div>
-                    <div class="text-muted small mb-2">(Kepala Ruangan / Supervisor)</div>
+                    <div class="text-muted small mb-2">(Kepala Ruangan)</div>
                     <div class="signature-box flex-grow-1 mb-2" style="min-height: 140px;">
                         <canvas id="sigCanvasHead" class="sig-canvas" style="width:100%; height:140px;"></canvas>
                     </div>

@@ -11,7 +11,8 @@ class Dashboard extends Admin_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Dashboard Admin';
+        $role = $this->session->userdata('admin_role');
+        $data['title'] = ($role === 'kepala_ruangan') ? 'Dashboard Kepala Ruangan' : 'Dashboard Admin';
         $data['stats'] = $this->Handover_model->get_stats();
         $data['recent_handovers'] = $this->Handover_model->get_all(array(), 5, 0);
         $data['problem_items'] = $this->Handover_model->get_problem_items_summary(8);

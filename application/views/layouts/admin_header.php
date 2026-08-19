@@ -16,6 +16,12 @@
 </head>
 <body>
 
+<?php
+$_user_role  = $this->session->userdata('admin_role');
+$_is_admin   = ($_user_role === 'administrator');
+$_role_label = $_is_admin ? 'Administrator' : 'Kepala Ruangan';
+?>
+
 <!-- DESKTOP SIDEBAR -->
 <aside class="app-sidebar" id="desktopSidebar">
     <div class="sidebar-brand">
@@ -31,6 +37,7 @@
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
 
+        <?php if ($_is_admin): ?>
         <div class="sidebar-heading">Master Data</div>
         <a href="<?= base_url('admin/rooms') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'rooms') ? 'active' : '' ?>">
             <i class="bi bi-building"></i> Master Ruang
@@ -46,21 +53,27 @@
         <a href="<?= base_url('admin/room-inventories') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'room-inventories') ? 'active' : '' ?>">
             <i class="bi bi-sliders"></i> Inventaris per Kamar
         </a>
+        <?php endif; ?>
 
-        <div class="sidebar-heading">Transaksi & Riwayat</div>
+        <div class="sidebar-heading">Transaksi &amp; Riwayat</div>
         <a href="<?= base_url('admin/handovers') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'handovers') ? 'active' : '' ?>">
             <i class="bi bi-file-earmark-text"></i> Transaksi Serah Terima
         </a>
 
+        <?php if ($_is_admin): ?>
         <div class="sidebar-heading">Laporan</div>
         <a href="<?= base_url('admin/reports/issues') ?>" class="nav-link-custom <?= ($this->uri->segment(3) == 'issues') ? 'active' : '' ?>">
             <i class="bi bi-exclamation-triangle-fill"></i> Laporan Masalah
         </a>
+        <?php endif; ?>
 
-        <div class="sidebar-heading">Akun</div>
-        <a href="<?= base_url('admin/change-password') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'change-password' || $this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
-            <i class="bi bi-key"></i> Ganti Password
+        <?php if ($_is_admin): ?>
+        <div class="sidebar-heading">Pengaturan</div>
+        <a href="<?= base_url('admin/users') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'users') ? 'active' : '' ?>">
+            <i class="bi bi-people-fill"></i> Pengaturan User
         </a>
+        <?php endif; ?>
+
         <a href="<?= base_url('admin/logout') ?>" class="nav-link-custom text-danger">
             <i class="bi bi-box-arrow-right"></i> Logout
         </a>
@@ -78,7 +91,7 @@
             <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
                 <i class="bi bi-list fs-5"></i>
             </button>
-            <h1 class="navbar-title"><?= html_escape(isset($title) ? $title : 'Dashboard Admin') ?></h1>
+            <h1 class="navbar-title"><?= html_escape(isset($title) ? $title : ($_is_admin ? 'Dashboard Admin' : 'Dashboard Kepala Ruangan')) ?></h1>
         </div>
 
         <div class="d-flex align-items-center gap-2">
@@ -91,9 +104,8 @@
                     <span><?= html_escape($this->session->userdata('admin_name') ? $this->session->userdata('admin_name') : 'Admin') ?></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
-                    <li><span class="dropdown-item-text text-muted small">Role: Administrator</span></li>
+                    <li><span class="dropdown-item-text text-muted small">Role: <?= html_escape($_role_label) ?></span></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="<?= base_url('admin/change-password') ?>"><i class="bi bi-key me-2"></i> Ganti Password</a></li>
                     <li><a class="dropdown-item text-danger" href="<?= base_url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                 </ul>
             </div>
@@ -117,6 +129,8 @@
                 <a href="<?= base_url('admin/dashboard') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'dashboard') ? 'active' : '' ?>">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
+
+                <?php if ($_is_admin): ?>
                 <div class="sidebar-heading">Master Data</div>
                 <a href="<?= base_url('admin/rooms') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'rooms') ? 'active' : '' ?>">
                     <i class="bi bi-building"></i> Master Ruang
@@ -131,18 +145,25 @@
                 <a href="<?= base_url('admin/room-inventories') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'room-inventories') ? 'active' : '' ?>">
                     <i class="bi bi-sliders"></i> Inventaris per Kamar
                 </a>
-                <div class="sidebar-heading">Transaksi & Riwayat</div>
+                <?php endif; ?>
+
+                <div class="sidebar-heading">Transaksi &amp; Riwayat</div>
                 <a href="<?= base_url('admin/handovers') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'handovers') ? 'active' : '' ?>">
                     <i class="bi bi-file-earmark-text"></i> Transaksi Serah Terima
                 </a>
+
+                <?php if ($_is_admin): ?>
                 <div class="sidebar-heading">Laporan</div>
                 <a href="<?= base_url('admin/reports/issues') ?>" class="nav-link-custom <?= ($this->uri->segment(3) == 'issues') ? 'active' : '' ?>">
                     <i class="bi bi-exclamation-triangle-fill"></i> Laporan Masalah
                 </a>
-                <div class="sidebar-heading">Akun</div>
-                <a href="<?= base_url('admin/change-password') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'change-password' || $this->uri->segment(2) == 'profile') ? 'active' : '' ?>">
-                    <i class="bi bi-key"></i> Ganti Password
+
+                <div class="sidebar-heading">Pengaturan</div>
+                <a href="<?= base_url('admin/users') ?>" class="nav-link-custom <?= ($this->uri->segment(2) == 'users') ? 'active' : '' ?>">
+                    <i class="bi bi-people-fill"></i> Pengaturan User
                 </a>
+                <?php endif; ?>
+
                 <a href="<?= base_url('admin/logout') ?>" class="nav-link-custom text-danger">
                     <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
@@ -167,3 +188,4 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif; ?>
+
