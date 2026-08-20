@@ -20,7 +20,7 @@
                         <th class="ps-3" style="width:40px;">#</th>
                         <th>Nama</th>
                         <th>Username</th>
-                        <th>Role</th>
+                        <th>Peran</th>
                         <th>Status</th>
                         <th class="text-center" style="width:160px;">Aksi</th>
                     </tr>
@@ -111,7 +111,7 @@
                         <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required minlength="6">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold">Role <span class="text-danger">*</span></label>
+                        <label class="form-label small fw-semibold">Peran <span class="text-danger">*</span></label>
                         <select name="role" class="form-select" required>
                             <option value="administrator">Administrator</option>
                             <option value="kepala_ruangan">Kepala Ruangan</option>
@@ -150,7 +150,7 @@
                         <input type="text" name="username" id="editUsername" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold">Role <span class="text-danger">*</span></label>
+                        <label class="form-label small fw-semibold">Peran <span class="text-danger">*</span></label>
                         <select name="role" id="editRole" class="form-select" required>
                             <option value="administrator">Administrator</option>
                             <option value="kepala_ruangan">Kepala Ruangan</option>

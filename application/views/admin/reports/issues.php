@@ -80,7 +80,7 @@
                 <?php else: ?>
                     <tr><td colspan="4" class="text-center text-muted py-5">
                         <i class="bi bi-check-circle display-4 d-block mb-2 text-success" style="opacity: .4;"></i>
-                        Semua barang inventaris dalam kondisi baik. Tidak ada masalah ditemukan.
+                        Semua barang inventaris dalam kondisi baik, tidak ada masalah ditemukan.
                     </td></tr>
                 <?php endif; ?>
             </tbody>

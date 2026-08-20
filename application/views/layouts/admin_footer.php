@@ -3,6 +3,7 @@
     <!-- APP FOOTER -->
     <footer class="app-footer">
         <span class="footer-text">&copy; <?= date('Y') ?> <strong>RSU Catharina 1914</strong> — Sistem Inventaris & Serah Terima Kamar</span>
+        <span class="footer-text" style="opacity:.25; font-size:.68rem;"><a href="https://github.com/itsKazor" style="color:inherit; text-decoration:none;" title="Developer">kz</a></span>
         <span class="footer-text">v1.0</span>
     </footer>
 </div>

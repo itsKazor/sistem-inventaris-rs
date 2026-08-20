@@ -50,7 +50,7 @@
                 </div>
                 <div>
                     <label class="form-label mb-1 d-block">Waktu Serah Terima</label>
-                    <input type="time" class="form-control form-control-sm" id="handover_time" name="handover_time" value="<?= isset($currentTime) ? $currentTime : date('H:i') ?>" required>
+                    <input type="text" class="form-control form-control-sm" id="handover_time" name="handover_time" value="<?= isset($currentTime) ? $currentTime : date('H:i') ?>" pattern="[0-9]{2}:[0-9]{2}" placeholder="HH:MM (contoh: 14:30)" maxlength="5" required>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                             <input type="text" class="form-control form-control-sm" name="sender_name" placeholder="Nama penyerah" required>
                         </div>
                         <div>
-                            <label class="form-label mb-1 text-muted">Jabatan / Role (Optional)</label>
+                            <label class="form-label mb-1 text-muted">Jabatan (Opsional)</label>
                             <input type="text" class="form-control form-control-sm" name="sender_position" placeholder="Contoh: Shift Pagi / Katim">
                         </div>
                     </td>
@@ -83,7 +83,7 @@
                             <input type="text" class="form-control form-control-sm" name="receiver_name" placeholder="Nama penerima" required>
                         </div>
                         <div>
-                            <label class="form-label mb-1 text-muted">Jabatan / Role (Optional)</label>
+                            <label class="form-label mb-1 text-muted">Jabatan (Opsional)</label>
                             <input type="text" class="form-control form-control-sm" name="receiver_position" placeholder="Contoh: Shift Sore">
                         </div>
                     </td>
@@ -96,12 +96,12 @@
 
         <div id="inventoriesLoading" class="text-center py-4" style="display: none;">
             <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-2 text-muted fw-bold">Memuat daftar inventaris standar kamar...</p>
+            <p class="mt-2 text-muted fw-bold">Memuat data inventaris...</p>
         </div>
 
         <div id="noKamarSelectedAlert" class="alert alert-info text-center py-4 my-3">
             <i class="bi bi-arrow-up-circle fs-3 d-block mb-1"></i>
-            Silakan pilih <strong>Ruang Perawatan</strong> dan <strong>Nomor Kamar</strong> di atas untuk memuat inventaris standar.
+            Pilih <strong>Ruang Perawatan</strong> dan <strong>Nomor Kamar</strong> untuk menampilkan daftar inventaris.
         </div>
 
         <div id="inventoriesContainer" class="mb-4" style="display: none;">
@@ -119,7 +119,7 @@
                         <span class="badge bg-danger ms-1" style="font-size: .65rem;">Rahasia / Admin Only</span>
                         <span class="badge bg-primary ms-1" style="font-size: .65rem;">Wajib</span>
                     </label>
-                    <div class="text-muted small mb-2">Aktifkan kamera, arahkan ke wajah pasien, lalu tekan "Ambil Foto".</div>
+                    <div class="text-muted small mb-2">Buka kamera, arahkan ke wajah pasien, lalu tekan Ambil Foto.</div>
 
                     <!-- LIVE CAMERA PREVIEW & NATIVE FALLBACK -->
                     <div id="camera_container">
@@ -156,8 +156,8 @@
                     <label class="form-label mb-1">
                         <i class="bi bi-journal-text me-1 text-info"></i> Catatan / Hal Penting
                     </label>
-                    <div class="text-muted small mb-2">Tuliskan catatan khusus, temuan kondisi fasilitas, atau pesan operasional antar-shift...</div>
-                    <textarea class="form-control" name="notes" rows="3" style="min-height: 200px;" placeholder="Tuliskan catatan khusus, temuan kondisi fasilitas, atau pesan operasional antar-shift..."></textarea>
+                    <div class="text-muted small mb-2">Catatan kondisi fasilitas atau hal penting lainnya.</div>
+                    <textarea class="form-control" name="notes" rows="3" style="min-height: 200px;" placeholder="Contoh: AC tidak dingin, lampu kamar mati, dll."></textarea>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
 
         <div class="row g-3 mb-4">
             <!-- TTD Menyerahkan -->
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menyerahkan <span class="text-danger">*</span></div>
                     <div class="text-muted small mb-2">(Penyerah)</div>
@@ -175,12 +175,12 @@
                         <canvas id="sigCanvasSender" class="sig-canvas" style="width:100%; height:140px;"></canvas>
                     </div>
                     <input type="hidden" name="signature_data_sender" id="sig_data_sender">
-                    <button type="button" class="btn btn-outline-secondary btn-sm mb-2 clear-sig-btn" data-target="sender"><i class="bi bi-eraser me-1"></i> Hapus Signature</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mb-2 clear-sig-btn" data-target="sender"><i class="bi bi-eraser me-1"></i> Hapus Tanda Tangan</button>
                 </div>
             </div>
 
             <!-- TTD Menerima -->
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
                     <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Pihak Menerima <span class="text-danger">*</span></div>
                     <div class="text-muted small mb-2">(Penerima)</div>
@@ -188,20 +188,7 @@
                         <canvas id="sigCanvasReceiver" class="sig-canvas" style="width:100%; height:140px;"></canvas>
                     </div>
                     <input type="hidden" name="signature_data_receiver" id="sig_data_receiver">
-                    <button type="button" class="btn btn-outline-secondary btn-sm mb-2 clear-sig-btn" data-target="receiver"><i class="bi bi-eraser me-1"></i> Hapus Signature</button>
-                </div>
-            </div>
-
-            <!-- TTD Mengetahui (Optional) -->
-            <div class="col-lg-4 col-md-12">
-                <div class="border rounded p-3 bg-white text-center h-100 d-flex flex-column shadow-sm">
-                    <div class="fw-bold text-dark mb-1" style="font-size: .9rem;">Mengetahui <span class="text-muted fw-normal">(Optional)</span></div>
-                    <div class="text-muted small mb-2">(Kepala Ruangan)</div>
-                    <div class="signature-box flex-grow-1 mb-2" style="min-height: 140px;">
-                        <canvas id="sigCanvasHead" class="sig-canvas" style="width:100%; height:140px;"></canvas>
-                    </div>
-                    <input type="hidden" name="signature_data_head" id="sig_data_head">
-                    <button type="button" class="btn btn-outline-secondary btn-sm mb-2 clear-sig-btn" data-target="head"><i class="bi bi-eraser me-1"></i> Hapus Signature</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mb-2 clear-sig-btn" data-target="receiver"><i class="bi bi-eraser me-1"></i> Hapus Tanda Tangan</button>
                 </div>
             </div>
         </div>
@@ -221,7 +208,7 @@
         <div class="form-check p-3 bg-light rounded border mb-4">
             <input class="form-check-input ms-0 me-3" type="checkbox" name="statement" id="statementCheck" value="1" style="width: 1.5em; height: 1.5em;" required>
             <label class="form-check-label fw-bold text-dark" for="statementCheck" style="font-size: .92rem;">
-                Saya mengonfirmasi bahwa seluruh data serah terima inventaris telah sesuai dan siap disimpan ke sistem.
+                Saya menyatakan data serah terima di atas sudah benar dan lengkap.
             </label>
         </div>
 
@@ -303,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderInventoriesTable(categories);
                     inventoriesContainer.style.display = 'block';
                 } else {
-                    inventoriesContainer.innerHTML = '<div class="alert alert-warning text-center">Kamar ini belum memiliki inventaris standar yang dikonfigurasi Admin.</div>';
+                    inventoriesContainer.innerHTML = '<div class="alert alert-warning text-center">Kamar ini belum punya daftar inventaris standar.</div>';
                     inventoriesContainer.style.display = 'block';
                 }
             });
@@ -412,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (['damaged', 'need_repair', 'shortage'].includes(this.value)) {
                     noteInput.setAttribute('required', 'required');
                     noteInput.classList.add('border-danger');
-                    noteInput.placeholder = 'Wajib diisi! Jelaskan kerusakan / penyebab kurang...';
+                    noteInput.placeholder = 'Wajib diisi. Tulis kondisi kerusakan / kekurangan...';
                 } else {
                     noteInput.removeAttribute('required');
                     noteInput.classList.remove('border-danger');
@@ -514,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== 4. SIGNATURE PADS =====
     const sigPads = {};
-    ['sender', 'receiver', 'head'].forEach(type => {
+    ['sender', 'receiver'].forEach(type => {
         const canvas = document.getElementById('sigCanvas' + type.charAt(0).toUpperCase() + type.slice(1));
         const ctx = canvas.getContext('2d');
         const hiddenInput = document.getElementById('sig_data_' + type);

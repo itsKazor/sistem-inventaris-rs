@@ -501,6 +501,7 @@ $config['compress_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'local';
+$config['appTimezone'] = 'Asia/Jakarta';
 
 /*
 |--------------------------------------------------------------------------

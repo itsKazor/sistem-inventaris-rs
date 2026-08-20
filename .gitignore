@@ -6,6 +6,8 @@ Desktop.ini
 # Temporary & Cache Files
 *.log
 /writable/
+application/logs/log-*.php
+
 
 # Node & Composer
 node_modules/

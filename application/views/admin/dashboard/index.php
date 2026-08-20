@@ -11,7 +11,7 @@
                 else echo 'Malam';
             ?>, <span class="text-primary"><?= html_escape($this->session->userdata('admin_name') ? $this->session->userdata('admin_name') : 'Admin') ?></span>
         </h4>
-        <p class="text-muted mb-0" style="font-size: .88rem;">Ringkasan aktivitas serah terima inventaris kamar hari ini.</p>
+        <p class="text-muted mb-0" style="font-size: .88rem;">Ringkasan transaksi serah terima inventaris kamar hari ini.</p>
     </div>
     <div class="d-flex align-items-center gap-2">
         <span class="badge bg-light text-dark border px-3 py-2 fw-semibold" style="font-size: .82rem;">
@@ -56,7 +56,7 @@
                 <div>
                     <div style="opacity: .75; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Belum Ditinjau</div>
                     <div class="fs-2 fw-bold mt-1"><?= number_format($stats['pending']) ?></div>
-                    <div style="opacity: .65; font-size: .72rem; font-weight: 500; margin-top: 2px;">menunggu review</div>
+                    <div style="opacity: .65; font-size: .72rem; font-weight: 500; margin-top: 2px;">menunggu verifikasi</div>
                 </div>
                 <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center;">
                     <i class="bi bi-hourglass-split fs-4"></i>
@@ -116,30 +116,79 @@
                                     <td><?= html_escape($h['receiver_name']) ?></td>
                                     <td class="text-center">
                                         <?php if ($h['status'] === 'reviewed'): ?>
-                                            <span class="badge bg-success"><i class="bi bi-check-all me-1"></i>Reviewed</span>
+                                            <span class="badge bg-success mb-1"><i class="bi bi-check-all me-1"></i>Diverifikasi</span>
                                         <?php else: ?>
-                                            <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Submitted</span>
+                                            <span class="badge bg-warning text-dark mb-1"><i class="bi bi-hourglass-split me-1"></i>Menunggu Verifikasi</span>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($h['checkout_status']) && $h['checkout_status'] === 'has_liability'): ?>
+                                            <span class="badge bg-danger d-block" style="font-size: .68rem;"><i class="bi bi-exclamation-triangle me-1"></i>Ada Ganti Rugi</span>
+                                        <?php elseif (!empty($h['checkout_status']) && $h['checkout_status'] === 'cleared'): ?>
+                                            <span class="badge bg-info text-dark d-block" style="font-size: .68rem;"><i class="bi bi-box-arrow-right me-1"></i>Sudah Check-out</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-light text-secondary border d-block" style="font-size: .68rem;"><i class="bi bi-hospital me-1"></i>Di Kamar</span>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <a href="<?= base_url('admin/handovers/show/' . $h['id']) ?>" class="btn btn-outline-primary" style="font-size: .78rem;" title="Detail Transaksi">
-                                                <i class="bi bi-eye"></i> Detail
-                                            </a>
-                                            <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>" target="_blank" class="btn btn-outline-secondary" style="font-size: .78rem;" title="Pratinjau Full Page PDF">
-                                                <i class="bi bi-file-earmark-pdf"></i> Preview
-                                            </a>
-                                            <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>?print=1" target="_blank" class="btn btn-dark" style="font-size: .78rem;" title="Cetak / Print Dokumen A4">
-                                                <i class="bi bi-printer"></i>
-                                            </a>
-                                        </div>
-                                    </td>
+                                   <td class="text-center">
+    <div class="d-flex justify-content-center align-items-center gap-1">
+
+        <!-- DETAIL -->
+        <a href="<?= base_url('admin/handovers/show/' . $h['id']) ?>"
+           class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center"
+           style="width: 34px; height: 34px;"
+           title="Lihat Detail Transaksi">
+            <i class="bi bi-eye"></i>
+        </a>
+
+        <?php if (empty($h['checkout_status']) || $h['checkout_status'] === 'none'): ?>
+
+            <!-- CHECKOUT -->
+            <a href="<?= base_url('admin/handovers/checkout/' . $h['id']) ?>"
+               class="btn btn-outline-danger btn-sm d-inline-flex align-items-center justify-content-center"
+               style="width: 34px; height: 34px;"
+               title="Pemeriksaan Check-out Pasien Pulang">
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
+
+        <?php else: ?>
+
+            <!-- BA PULANG -->
+            <a href="<?= base_url('admin/handovers/preview-checkout/' . $h['id']) ?>"
+               target="_blank"
+               class="btn btn-info text-dark btn-sm d-inline-flex align-items-center justify-content-center"
+               style="width: 34px; height: 34px;"
+               title="Preview Berita Acara Check-out">
+                <i class="bi bi-file-earmark-check"></i>
+            </a>
+
+        <?php endif; ?>
+
+        <!-- PREVIEW PDF -->
+        <a href="<?= base_url('admin/handovers/preview/' . $h['id']) ?>"
+           target="_blank"
+           class="btn btn-secondary btn-sm d-inline-flex align-items-center justify-content-center"
+           style="width: 34px; height: 34px;"
+           title="Pratinjau PDF Serah Terima">
+            <i class="bi bi-file-earmark-pdf"></i>
+        </a>
+
+        <!-- DELETE -->
+        <a href="<?= base_url('admin/handovers/delete/' . $h['id']) ?>"
+           class="btn btn-outline-danger btn-sm d-inline-flex align-items-center justify-content-center"
+           style="width: 34px; height: 34px;"
+           onclick="return confirm('Apakah Anda yakin ingin menghapus transaksi <?= html_escape($h['handover_number']) ?>?')"
+           title="Hapus Transaksi">
+            <i class="bi bi-trash"></i>
+        </a>
+
+    </div>
+</td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr><td colspan="6" class="text-center text-muted py-5">
                                 <i class="bi bi-inbox display-5 d-block mb-2 text-secondary" style="opacity: .4;"></i>
-                                Belum ada data serah terima hari ini.
+                                Belum ada transaksi serah terima hari ini.
                             </td></tr>
                         <?php endif; ?>
                     </tbody>

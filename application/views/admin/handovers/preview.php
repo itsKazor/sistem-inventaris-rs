@@ -102,7 +102,7 @@
         .judul-row {
             position: relative;
             text-align: center;
-            margin-top: 8px;
+            margin-top: 10px;
             padding-right: 120px;
         }
 
@@ -179,6 +179,10 @@
             font-size: 10px;
         }
 
+        .ftable tbody tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
         .ftable .center {
             text-align: center;
         }
@@ -252,6 +256,12 @@
         .sig-box img {
             max-height: 48px;
             max-width: 85%;
+        }
+
+        .sig-box .sig-empty {
+            color: #9ca3af;
+            font-size: 8px;
+            font-style: italic;
         }
 
         .name-line {
@@ -345,9 +355,9 @@
             <i class="bi bi-file-earmark-pdf-fill text-danger fs-5"></i>
             <span>Preview Dokumen: <strong><?= html_escape($handover['handover_number']) ?></strong></span>
             <?php if ($handover['status'] === 'reviewed'): ?>
-                <span class="badge bg-success"><i class="bi bi-check-all me-1"></i>Reviewed</span>
+                <span class="badge bg-success"><i class="bi bi-check-all me-1"></i>Diverifikasi</span>
             <?php else: ?>
-                <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Submitted</span>
+                <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Menunggu Verifikasi</span>
             <?php endif; ?>
         </div>
 
@@ -361,7 +371,7 @@
             <a href="<?= base_url('admin/handovers/show/' . $handover['id']) ?>" class="btn btn-outline-light btn-sm px-3">
                 <i class="bi bi-arrow-left me-1"></i> Detail Transaksi
             </a>
-            
+
             <button onclick="window.close()" class="btn btn-secondary btn-sm px-2" title="Tutup Tab">
                 <i class="bi bi-x-lg"></i>
             </button>
@@ -406,6 +416,12 @@
                     <td class="meta-label">Waktu</td>
                     <td class="meta-value"><?= html_escape($handover['handover_time']) ?> WIB</td>
                 </tr>
+                <tr>
+                    <td class="meta-label">Status Dokumen</td>
+                    <td class="meta-value"><?= $handover['status'] === 'reviewed' ? 'Telah Diverifikasi' : 'Menunggu Verifikasi' ?></td>
+                    <td class="meta-label">Verifikator</td>
+                    <td class="meta-value"><?= !empty($handover['reviewer_name']) ? html_escape($handover['reviewer_name']) : '-' ?></td>
+                </tr>
             </table>
 
             <!-- 1. IDENTITAS -->
@@ -419,13 +435,13 @@
                     <td>
                         <div class="field-label">Nama Lengkap Penyerah</div>
                         <div class="field-value"><?= html_escape($handover['sender_name']) ?></div>
-                        <div class="field-label">Jabatan / Role</div>
+                        <div class="field-label">Jabatan</div>
                         <div class="field-value"><?= html_escape($handover['sender_position']) ?: '-' ?></div>
                     </td>
                     <td>
                         <div class="field-label">Nama Lengkap Penerima</div>
                         <div class="field-value"><?= html_escape($handover['receiver_name']) ?></div>
-                        <div class="field-label">Jabatan / Role</div>
+                        <div class="field-label">Jabatan</div>
                         <div class="field-value"><?= html_escape($handover['receiver_position']) ?: '-' ?></div>
                     </td>
                 </tr>
@@ -496,6 +512,8 @@
                     <div class="sig-box">
                         <?php if (!empty($handover['sender_signature_path']) && file_exists(FCPATH . ltrim($handover['sender_signature_path'], '/\\'))): ?>
                             <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/sender') ?>" alt="TTD Sender">
+                        <?php else: ?>
+                            <span class="sig-empty">Belum ada tanda tangan</span>
                         <?php endif; ?>
                     </div>
                     <div class="name-line"><?= html_escape($handover['sender_name']) ?></div>
@@ -507,22 +525,14 @@
                     <div class="sig-box">
                         <?php if (!empty($handover['receiver_signature_path']) && file_exists(FCPATH . ltrim($handover['receiver_signature_path'], '/\\'))): ?>
                             <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/receiver') ?>" alt="TTD Receiver">
+                        <?php else: ?>
+                            <span class="sig-empty">Belum ada tanda tangan</span>
                         <?php endif; ?>
                     </div>
                     <div class="name-line"><?= html_escape($handover['receiver_name']) ?></div>
                     <div class="pos-line"><?= html_escape($handover['receiver_position']) ?></div>
                 </div>
-                <div class="ttd-col">
-                    <div class="ttd-role">Mengetahui</div>
-                    <div class="ttd-sub">(Kepala Ruangan / Supervisor)</div>
-                    <div class="sig-box">
-                        <?php if (!empty($handover['acknowledgement_signature_path']) && file_exists(FCPATH . ltrim($handover['acknowledgement_signature_path'], '/\\'))): ?>
-                            <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/head') ?>" alt="TTD Head">
-                        <?php endif; ?>
-                    </div>
-                    <div class="name-line"></div>
-                    <div class="pos-line"></div>
-                </div>
+
             </div>
 
             <!-- 5. PERNYATAAN -->

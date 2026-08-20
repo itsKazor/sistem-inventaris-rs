@@ -59,6 +59,7 @@ $condLabels = array(
         .kop-logo-centered img {
             height: 70px;
             width: auto;
+            filter: grayscale(100%);
         }
 
         .kop-rule-thick {
@@ -142,12 +143,15 @@ $condLabels = array(
         .ftable th {
             font-size: 8.5px;
             text-transform: uppercase;
-            background: #efefef;
+            background: #e5e5e5 !important;
             font-weight: bold;
+            color: #000;
         }
 
         .ftable td {
             font-size: 10px;
+            background: #fff !important;
+            color: #000;
         }
 
         .ftable .center {
@@ -160,11 +164,17 @@ $condLabels = array(
         }
 
         .meta-table .meta-label {
-            background: #f7f7f7;
+            background: #e5e5e5 !important;
             font-weight: bold;
             text-transform: uppercase;
             font-size: 8.5px;
             width: 118px;
+            color: #000;
+        }
+
+        .meta-table .meta-value {
+            background: #fff !important;
+            color: #000;
         }
 
         .field-label {
@@ -179,6 +189,7 @@ $condLabels = array(
             border-bottom: 1px solid #000;
             padding-bottom: 1px;
             min-height: 14px;
+            color: #000;
         }
 
         .notes-box {
@@ -186,6 +197,8 @@ $condLabels = array(
             min-height: 44px;
             padding: 4px 6px;
             font-size: 10px;
+            background: #fff !important;
+            color: #000;
         }
 
         .ttd-grid {
@@ -217,12 +230,19 @@ $condLabels = array(
             align-items: center;
             justify-content: center;
             margin: 2px 0 1px;
-            background: #fff;
+            background: #fff !important;
         }
 
         .sig-box img {
             max-height: 48px;
             max-width: 85%;
+            filter: grayscale(100%);
+        }
+
+        .sig-box .sig-empty {
+            color: #9ca3af;
+            font-size: 8px;
+            font-style: italic;
         }
 
         .name-line {
@@ -246,6 +266,7 @@ $condLabels = array(
             border-radius: 4px;
             padding: 6px 10px;
             margin: 3px 0 4px;
+            background: #fff !important;
         }
 
         .pernyataan-text {
@@ -326,13 +347,13 @@ $condLabels = array(
                 <td>
                     <div class="field-label">Nama Lengkap Penyerah</div>
                     <div class="field-value"><?= html_escape($handover['sender_name']) ?></div>
-                    <div class="field-label">Jabatan / Role</div>
+                    <div class="field-label">Jabatan</div>
                     <div class="field-value"><?= html_escape($handover['sender_position']) ?: '-' ?></div>
                 </td>
                 <td>
                     <div class="field-label">Nama Lengkap Penerima</div>
                     <div class="field-value"><?= html_escape($handover['receiver_name']) ?></div>
-                    <div class="field-label">Jabatan / Role</div>
+                    <div class="field-label">Jabatan</div>
                     <div class="field-value"><?= html_escape($handover['receiver_position']) ?: '-' ?></div>
                 </td>
             </tr>
@@ -385,38 +406,44 @@ $condLabels = array(
         <div class="sec-title">4. Tanda Tangan Digital</div>
         <div class="ttd-grid">
             <div class="ttd-col">
-                <div class="ttd-role">Pihak Menyerahkan</div>
-                <div class="ttd-sub">(Penyerah)</div>
-                <div class="sig-box">
-                    <?php if (!empty($handover['sender_signature_path']) && file_exists(FCPATH . ltrim($handover['sender_signature_path'], '/\\'))): ?>
-                        <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/sender') ?>" alt="TTD Sender">
-                    <?php endif; ?>
+                    <div class="ttd-role">Pihak Menyerahkan</div>
+                    <div class="ttd-sub">(Penyerah)</div>
+                    <div class="sig-box">
+                        <?php if (!empty($handover['sender_signature_path']) && file_exists(FCPATH . ltrim($handover['sender_signature_path'], '/\\'))): ?>
+                            <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/sender') ?>" alt="TTD Sender">
+                        <?php else: ?>
+                            <span class="sig-empty">Belum ada tanda tangan</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="name-line"><?= html_escape($handover['sender_name']) ?></div>
+                    <div class="pos-line"><?= html_escape($handover['sender_position']) ?></div>
                 </div>
-                <div class="name-line"><?= html_escape($handover['sender_name']) ?></div>
-                <div class="pos-line"><?= html_escape($handover['sender_position']) ?></div>
-            </div>
             <div class="ttd-col">
-                <div class="ttd-role">Pihak Menerima</div>
-                <div class="ttd-sub">(Penerima)</div>
-                <div class="sig-box">
-                    <?php if (!empty($handover['receiver_signature_path']) && file_exists(FCPATH . ltrim($handover['receiver_signature_path'], '/\\'))): ?>
-                        <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/receiver') ?>" alt="TTD Receiver">
-                    <?php endif; ?>
+                    <div class="ttd-role">Pihak Menerima</div>
+                    <div class="ttd-sub">(Penerima)</div>
+                    <div class="sig-box">
+                        <?php if (!empty($handover['receiver_signature_path']) && file_exists(FCPATH . ltrim($handover['receiver_signature_path'], '/\\'))): ?>
+                            <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/receiver') ?>" alt="TTD Receiver">
+                        <?php else: ?>
+                            <span class="sig-empty">Belum ada tanda tangan</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="name-line"><?= html_escape($handover['receiver_name']) ?></div>
+                    <div class="pos-line"><?= html_escape($handover['receiver_position']) ?></div>
                 </div>
-                <div class="name-line"><?= html_escape($handover['receiver_name']) ?></div>
-                <div class="pos-line"><?= html_escape($handover['receiver_position']) ?></div>
-            </div>
             <div class="ttd-col">
-                <div class="ttd-role">Mengetahui</div>
-                <div class="ttd-sub">(Kepala Ruangan / Supervisor)</div>
-                <div class="sig-box">
-                    <?php if (!empty($handover['acknowledgement_signature_path']) && file_exists(FCPATH . ltrim($handover['acknowledgement_signature_path'], '/\\'))): ?>
-                        <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/head') ?>" alt="TTD Head">
-                    <?php endif; ?>
+                    <div class="ttd-role">Mengetahui</div>
+                    <div class="ttd-sub">(Kepala Ruangan / Supervisor)</div>
+                    <div class="sig-box">
+                        <?php if (!empty($handover['acknowledgement_signature_path']) && file_exists(FCPATH . ltrim($handover['acknowledgement_signature_path'], '/\\'))): ?>
+                            <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/head') ?>" alt="TTD Head">
+                        <?php else: ?>
+                            <span class="sig-empty">Belum ada tanda tangan</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="name-line"></div>
+                    <div class="pos-line"></div>
                 </div>
-                <div class="name-line"></div>
-                <div class="pos-line"></div>
-            </div>
         </div>
 
         <!-- 5. PERNYATAAN -->
@@ -448,19 +475,30 @@ $condLabels = array(
             
             <!-- PROMINENT ACTION BUTTONS -->
             <div class="d-flex align-items-center gap-2 flex-wrap">
+                <?php if ($handover['checkout_status'] === 'none'): ?>
+                    <!-- CHECKOUT BUTTON -->
+                    <a href="<?= base_url('admin/handovers/checkout/' . $handover['id']) ?>" class="btn btn-danger btn-md px-3 py-2 fw-bold shadow-sm">
+                        <i class="bi bi-box-arrow-right me-1 fs-5 align-middle"></i> Check-out
+                    </a>
+                <?php else: ?>
+                    <!-- PREVIEW CHECKOUT PDF BUTTON -->
+                    <a href="<?= base_url('admin/handovers/preview-checkout/' . $handover['id']) ?>" target="_blank" class="btn btn-info text-dark btn-md px-3 py-2 fw-bold shadow-sm">
+                        <i class="bi bi-file-earmark-check-fill me-1 fs-5 align-middle"></i> Preview Check-out
+                    </a>
+                    <!-- EDIT CHECKOUT BUTTON -->
+                    <a href="<?= base_url('admin/handovers/checkout/' . $handover['id']) ?>" class="btn btn-outline-warning btn-md px-3 py-2 fw-bold shadow-sm" title="Edit Data Check-out">
+                        <i class="bi bi-pencil-square me-1 fs-5 align-middle"></i> Edit Check-out
+                    </a>
+                <?php endif; ?>
+
                 <!-- PREVIEW PDF BUTTON -->
                 <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>" target="_blank" class="btn btn-secondary btn-md px-3 py-2 fw-bold shadow-sm">
-                    <i class="bi bi-file-earmark-pdf-fill me-1 fs-5 align-middle text-warning"></i> Preview PDF
+                    <i class="bi bi-file-earmark-pdf-fill me-1 fs-5 align-middle text-warning"></i> Preview
                 </a>
 
-                <!-- PRINT BUTTON -->
-                <button onclick="window.print()" class="btn btn-dark btn-md px-3 py-2 fw-bold shadow-sm">
-                    <i class="bi bi-printer-fill me-2 fs-5 align-middle"></i> Cetak / Print Dokumen A4
-                </button>
-
                 <?php if ($handover['status'] === 'submitted'): ?>
-                    <a href="<?= base_url('admin/handovers/review/' . $handover['id']) ?>" class="btn btn-success btn-md px-3 py-2 fw-bold shadow-sm" onclick="return confirm('Tandai data ini sebagai sudah direview?')">
-                        <i class="bi bi-check-all me-1 fs-5 align-middle"></i> Verifikasi / Review
+                    <a href="<?= base_url('admin/handovers/review/' . $handover['id']) ?>" class="btn btn-success btn-md px-3 py-2 fw-bold shadow-sm" onclick="return confirm('Tandai data ini sebagai sudah diverifikasi?')">
+                        <i class="bi bi-check-all me-1 fs-5 align-middle"></i> Verifikasi
                     </a>
                 <?php else: ?>
                     <span class="badge bg-success-subtle text-success border border-success-subtle py-2 px-3 fs-6">
@@ -475,13 +513,52 @@ $condLabels = array(
         </div>
     </div>
 
+    <!-- CHECKOUT STATUS BANNER (IF ALREADY CHECKED OUT) -->
+    <?php if ($handover['checkout_status'] !== 'none'): ?>
+        <div class="card border mb-4 shadow-sm <?= $handover['checkout_status'] === 'has_liability' ? 'border-danger' : 'border-success' ?>">
+            <div class="card-header <?= $handover['checkout_status'] === 'has_liability' ? 'bg-danger-subtle text-danger' : 'bg-success-subtle text-success' ?> py-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi <?= $handover['checkout_status'] === 'has_liability' ? 'bi-exclamation-triangle-fill text-danger' : 'bi-check-circle-fill text-success' ?> me-2"></i>
+                        Status Pasien: Telah Check-out (<?= $handover['checkout_status'] === 'has_liability' ? 'Ada Selisih / Wajib Ganti Rugi' : 'Semua Fasilitas Sesuai & Lengkap' ?>)
+                    </h5>
+                    <small class="text-dark">Selesai diperiksa pada: <strong><?= date('d F Y', strtotime($handover['checkout_date'])) ?> <?= html_escape($handover['checkout_time']) ?> WIB</strong></small>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="<?= base_url('admin/handovers/preview-checkout/' . $handover['id']) ?>" target="_blank" class="btn btn-sm btn-danger fw-bold shadow-sm">
+                        <i class="bi bi-printer me-1"></i> Preview Check-out
+                    </a>
+                    <a href="<?= base_url('admin/handovers/reset-checkout/' . $handover['id']) ?>" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Reset status checkout untuk mengulang Check-out?')">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset
+                    </a>
+                </div>
+            </div>
+            <div class="card-body py-3 bg-white">
+                <div class="row g-3" style="font-size: .9rem;">
+                    <div class="col-md-3 col-sm-6">
+                        <small class="text-muted d-block">Petugas Pemeriksa Ruangan</small>
+                        <strong class="text-dark"><i class="bi bi-person-check me-1 text-primary"></i> <?= html_escape($handover['checkout_officer_name'] ?: '-') ?></strong>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <small class="text-muted d-block">Pasien / Penanggung Jawab</small>
+                        <strong class="text-dark"><i class="bi bi-person-heart me-1 text-danger"></i> <?= html_escape($handover['checkout_patient_rep'] ?: $handover['receiver_name']) ?></strong>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <small class="text-muted d-block">Catatan Kepulangan / Billing</small>
+                        <span class="text-dark fw-semibold"><?= !empty($handover['checkout_notes']) ? html_escape($handover['checkout_notes']) : 'Tidak ada catatan khusus.' ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="row g-4">
         <!-- LEFT COLUMN -->
         <div class="col-lg-8">
             <!-- A. INFORMASI UMUM -->
             <div class="card border mb-4 shadow-sm">
                 <div class="card-header py-3 bg-light border-bottom">
-                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-info-circle-fill text-primary me-2"></i>A. Informasi General</h5>
+                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-info-circle-fill text-primary me-2"></i>A. Informasi Umum</h5>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
@@ -494,26 +571,26 @@ $condLabels = array(
                             <span class="fw-bold fs-5 text-dark"><?= html_escape($handover['room_number_name']) ?></span>
                         </div>
                         <div class="col-sm-6">
-                            <small class="text-muted d-block">Tanggal & Waktu Serah Terima</small>
+                            <small class="text-muted d-block">Tanggal & Waktu Serah Terima (Masuk)</small>
                             <span class="fw-semibold text-dark"><?= date('d F Y', strtotime($handover['handover_date'])) ?> — <?= html_escape($handover['handover_time']) ?> WIB</span>
                         </div>
                         <div class="col-sm-6">
                             <small class="text-muted d-block">Status Verifikasi Admin</small>
                             <?php if ($handover['status'] === 'reviewed'): ?>
-                                <span class="badge bg-success"><i class="bi bi-check-all me-1"></i> Reviewed</span>
+                                <span class="badge bg-success"><i class="bi bi-check-all me-1"></i> Diverifikasi</span>
                             <?php else: ?>
-                                <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i> Submitted (Menunggu Review)</span>
+                                <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i> Menunggu Verifikasi</span>
                             <?php endif; ?>
                         </div>
                         <div class="col-sm-6 border-top pt-2">
-                            <small class="text-muted d-block">Pihak Menyerahkan</small>
+                            <small class="text-muted d-block">Pihak Menyerahkan (Awal)</small>
                             <span class="fw-bold text-dark"><i class="bi bi-person-up me-1 text-primary"></i> <?= html_escape($handover['sender_name']) ?></span>
                             <?php if (!empty($handover['sender_position'])): ?>
                                 <small class="text-muted d-block">(<?= html_escape($handover['sender_position']) ?>)</small>
                             <?php endif; ?>
                         </div>
                         <div class="col-sm-6 border-top pt-2">
-                            <small class="text-muted d-block">Pihak Menerima</small>
+                            <small class="text-muted d-block">Pihak Menerima (Awal)</small>
                             <span class="fw-bold text-dark"><i class="bi bi-person-down me-1 text-success"></i> <?= html_escape($handover['receiver_name']) ?></span>
                             <?php if (!empty($handover['receiver_position'])): ?>
                                 <small class="text-muted d-block">(<?= html_escape($handover['receiver_position']) ?>)</small>
@@ -523,69 +600,152 @@ $condLabels = array(
                 </div>
             </div>
 
-            <!-- B. INVENTARIS STANDAR VS AKTUAL TABLE -->
+            <!-- B. INVENTARIS STANDAR VS AKTUAL / KOMPARASI TABLE -->
             <div class="card border mb-4 shadow-sm">
-                <div class="card-header py-3 bg-light border-bottom">
-                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-ui-checks text-success me-2"></i>B. Checklist Inventaris Kamar & Kondisi Fisik</h5>
+                <div class="card-header py-3 bg-light border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <h5 class="fw-bold mb-0 text-dark">
+                        <i class="bi bi-ui-checks text-success me-2"></i>
+                        <?= $handover['checkout_status'] !== 'none' ? 'B. Komparasi Inventaris: Masuk (Check-in) vs Pulang (Check-out)' : 'B. Checklist Inventaris Kamar & Kondisi Fisik (Check-in)' ?>
+                    </h5>
+                    <?php if ($handover['checkout_status'] === 'none'): ?>
+                        <a href="<?= base_url('admin/handovers/checkout/' . $handover['id']) ?>" class="btn btn-sm btn-danger fw-bold">
+                            <i class="bi bi-box-arrow-right me-1"></i> Check-out
+                        </a>
+                    <?php endif; ?>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover align-middle mb-0" style="font-size: .92rem;">
+                        <table class="table table-bordered table-hover align-middle mb-0" style="font-size: .9rem;">
                             <thead class="table-light">
-                                <tr>
-                                    <th width="40" class="text-center">No</th>
-                                    <th>Inventaris</th>
-                                    <th width="80" class="text-center">Standar</th>
-                                    <th width="80" class="text-center">Aktual</th>
-                                    <th width="90" class="text-center">Selisih</th>
-                                    <th width="140" class="text-center">Kondisi</th>
-                                    <th>Catatan Masalah</th>
-                                </tr>
+                                <?php if ($handover['checkout_status'] !== 'none'): ?>
+                                    <tr>
+                                        <th width="35" class="text-center" rowspan="2">No</th>
+                                        <th rowspan="2">Inventaris</th>
+                                        <th width="75" class="text-center" rowspan="2">Standar</th>
+                                        <th colspan="2" class="text-center bg-primary-subtle text-primary">Kondisi Awal (Masuk)</th>
+                                        <th colspan="2" class="text-center bg-warning-subtle text-dark">Kondisi Akhir (Pulang)</th>
+                                        <th width="80" class="text-center" rowspan="2">Selisih</th>
+                                        <th width="110" class="text-center" rowspan="2">Ganti Rugi</th>
+                                        <th rowspan="2">Catatan</th>
+                                    </tr>
+                                    <tr>
+                                        <th width="50" class="text-center bg-primary-subtle text-primary">Qty</th>
+                                        <th width="75" class="text-center bg-primary-subtle text-primary">Kondisi</th>
+                                        <th width="50" class="text-center bg-warning-subtle">Qty</th>
+                                        <th width="75" class="text-center bg-warning-subtle">Kondisi</th>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr>
+                                        <th width="40" class="text-center">No</th>
+                                        <th>Inventaris</th>
+                                        <th width="80" class="text-center">Standar</th>
+                                        <th width="80" class="text-center">Aktual</th>
+                                        <th width="90" class="text-center">Selisih</th>
+                                        <th width="140" class="text-center">Kondisi</th>
+                                        <th>Catatan Masalah</th>
+                                    </tr>
+                                <?php endif; ?>
                             </thead>
                             <tbody>
                                 <?php foreach ($items as $idx => $it): ?>
-                                    <?php $isProblem = in_array($it['condition_status'], array('damaged', 'need_repair', 'shortage', 'not_available')); ?>
-                                    <tr class="<?= $isProblem ? 'table-warning' : '' ?>">
-                                        <td class="text-center fw-bold"><?= $idx + 1 ?></td>
-                                        <td class="fw-semibold text-dark"><?= html_escape($it['inventory_name_snapshot']) ?></td>
-                                        <td class="text-center font-monospace"><span class="badge bg-light text-dark border"><?= $it['standard_quantity_snapshot'] ?> <?= html_escape($it['inventory_unit_snapshot']) ?></span></td>
-                                        <td class="text-center font-monospace fw-bold fs-6"><?= $it['actual_quantity'] ?></td>
-                                        <td class="text-center">
-                                            <?php if ($it['difference_quantity'] == 0): ?>
-                                                <span class="badge bg-success-subtle text-success border border-success-subtle">0 (Sesuai)</span>
-                                            <?php elseif ($it['difference_quantity'] < 0): ?>
-                                                <span class="badge bg-danger">Kurang <?= abs($it['difference_quantity']) ?></span>
-                                            <?php else: ?>
-                                                <span class="badge bg-info text-dark">Lebih +<?= $it['difference_quantity'] ?></span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?php switch ($it['condition_status']) {
-                                                case 'good':
-                                                    echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> Baik</span>';
-                                                    break;
-                                                case 'damaged':
-                                                    echo '<span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i> Rusak</span>';
-                                                    break;
-                                                case 'need_repair':
-                                                    echo '<span class="badge bg-warning text-dark"><i class="bi bi-wrench me-1"></i> Perbaikan</span>';
-                                                    break;
-                                                case 'shortage':
-                                                    echo '<span class="badge bg-secondary"><i class="bi bi-dash-circle me-1"></i> Kurang</span>';
-                                                    break;
-                                                default:
-                                                    echo '<span class="badge bg-dark"><i class="bi bi-x-lg me-1"></i> Tidak Ada</span>';
-                                                    break;
-                                            } ?>
-                                        </td>
-                                        <td>
-                                            <?php if (!empty($it['notes'])): ?>
-                                                <span class="text-danger fw-semibold"><i class="bi bi-chat-left-text me-1"></i> <?= html_escape($it['notes']) ?></span>
-                                            <?php else: ?>
-                                                <span class="text-muted small">-</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
+                                    <?php if ($handover['checkout_status'] !== 'none'): ?>
+                                        <?php
+                                        $chkQty = isset($it['checkout_actual_qty']) && $it['checkout_actual_qty'] !== null ? (int)$it['checkout_actual_qty'] : (int)$it['actual_quantity'];
+                                        $chkCond = isset($it['checkout_condition']) && $it['checkout_condition'] !== null ? $it['checkout_condition'] : 'good';
+                                        $diff = $chkQty - (int)$it['actual_quantity'];
+                                        $isLiab = isset($it['is_liability']) && (int)$it['is_liability'] === 1;
+                                        ?>
+                                        <tr class="<?= $isLiab ? 'table-danger' : '' ?>">
+                                            <td class="text-center fw-bold"><?= $idx + 1 ?></td>
+                                            <td class="fw-semibold text-dark"><?= html_escape($it['inventory_name_snapshot']) ?></td>
+                                            <td class="text-center font-monospace"><span class="badge bg-light text-dark border"><?= $it['standard_quantity_snapshot'] ?> <?= html_escape($it['inventory_unit_snapshot']) ?></span></td>
+                                            
+                                            <!-- MASUK -->
+                                            <td class="text-center font-monospace fw-bold"><?= $it['actual_quantity'] ?></td>
+                                            <td class="text-center">
+                                                <span class="badge bg-secondary"><?= isset($condLabels[$it['condition_status']]) ? $condLabels[$it['condition_status']] : $it['condition_status'] ?></span>
+                                            </td>
+
+                                            <!-- PULANG -->
+                                            <td class="text-center font-monospace fw-bold fs-6 <?= $diff < 0 ? 'text-danger' : '' ?>"><?= $chkQty ?></td>
+                                            <td class="text-center">
+                                                <?php switch ($chkCond) {
+                                                    case 'good': echo '<span class="badge bg-success">Baik</span>'; break;
+                                                    case 'damaged': echo '<span class="badge bg-danger">Rusak</span>'; break;
+                                                    case 'need_repair': echo '<span class="badge bg-warning text-dark">Perbaikan</span>'; break;
+                                                    case 'shortage': echo '<span class="badge bg-secondary">Kurang</span>'; break;
+                                                    default: echo '<span class="badge bg-dark">Tidak Ada</span>'; break;
+                                                } ?>
+                                            </td>
+
+                                            <!-- SELISIH -->
+                                            <td class="text-center">
+                                                <?php if ($diff === 0): ?>
+                                                    <span class="badge bg-success-subtle text-success border border-success-subtle">0 (Pas)</span>
+                                                <?php elseif ($diff < 0): ?>
+                                                    <span class="badge bg-danger">Kurang <?= abs($diff) ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-info text-dark">Lebih +<?= $diff ?></span>
+                                                <?php endif; ?>
+                                            </td>
+
+                                            <!-- GANTI RUGI -->
+                                            <td class="text-center">
+                                                <?php if ($isLiab): ?>
+                                                    <span class="badge bg-danger"><i class="bi bi-cash-stack me-1"></i>Wajib Ganti</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-light text-muted border">-</span>
+                                                <?php endif; ?>
+                                            </td>
+
+                                            <td>
+                                                <?= !empty($it['checkout_notes']) ? html_escape($it['checkout_notes']) : (!empty($it['notes']) ? html_escape($it['notes']) : '<span class="text-muted small">-</span>') ?>
+                                            </td>
+                                        </tr>
+                                    <?php else: ?>
+                                        <?php $isProblem = in_array($it['condition_status'], array('damaged', 'need_repair', 'shortage', 'not_available')); ?>
+                                        <tr class="<?= $isProblem ? 'table-warning' : '' ?>">
+                                            <td class="text-center fw-bold"><?= $idx + 1 ?></td>
+                                            <td class="fw-semibold text-dark"><?= html_escape($it['inventory_name_snapshot']) ?></td>
+                                            <td class="text-center font-monospace"><span class="badge bg-light text-dark border"><?= $it['standard_quantity_snapshot'] ?> <?= html_escape($it['inventory_unit_snapshot']) ?></span></td>
+                                            <td class="text-center font-monospace fw-bold fs-6"><?= $it['actual_quantity'] ?></td>
+                                            <td class="text-center">
+                                                <?php if ($it['difference_quantity'] == 0): ?>
+                                                    <span class="badge bg-success-subtle text-success border border-success-subtle">0 (Sesuai)</span>
+                                                <?php elseif ($it['difference_quantity'] < 0): ?>
+                                                    <span class="badge bg-danger">Kurang <?= abs($it['difference_quantity']) ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-info text-dark">Lebih +<?= $it['difference_quantity'] ?></span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php switch ($it['condition_status']) {
+                                                    case 'good':
+                                                        echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> Baik</span>';
+                                                        break;
+                                                    case 'damaged':
+                                                        echo '<span class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i> Rusak</span>';
+                                                        break;
+                                                    case 'need_repair':
+                                                        echo '<span class="badge bg-warning text-dark"><i class="bi bi-wrench me-1"></i> Perbaikan</span>';
+                                                        break;
+                                                    case 'shortage':
+                                                        echo '<span class="badge bg-secondary"><i class="bi bi-dash-circle me-1"></i> Kurang</span>';
+                                                        break;
+                                                    default:
+                                                        echo '<span class="badge bg-dark"><i class="bi bi-x-lg me-1"></i> Tidak Ada</span>';
+                                                        break;
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php if (!empty($it['notes'])): ?>
+                                                    <span class="text-danger fw-semibold"><i class="bi bi-chat-left-text me-1"></i> <?= html_escape($it['notes']) ?></span>
+                                                <?php else: ?>
+                                                    <span class="text-muted small">-</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -617,30 +777,30 @@ $condLabels = array(
                 </div>
             </div>
 
-            <!-- CATATAN -->
+            <!-- CATATAN AWAL -->
             <div class="card border mb-4 shadow-sm">
                 <div class="card-header py-3 bg-light border-bottom">
-                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-journal-text text-primary me-2"></i>Catatan Tambahan</h5>
+                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-journal-text text-primary me-2"></i>Catatan</h5>
                 </div>
                 <div class="card-body">
                     <?php if (!empty($handover['notes'])): ?>
                         <p class="text-dark bg-light p-3 rounded border mb-0" style="white-space: pre-line; font-size: .92rem;"><?= html_escape($handover['notes']) ?></p>
                     <?php else: ?>
-                        <p class="text-muted mb-0 text-center py-2">Tidak ada catatan khusus.</p>
+                        <p class="text-muted mb-0 text-center py-2">Tidak ada catatan khusus saat masuk.</p>
                     <?php endif; ?>
                 </div>
             </div>
 
-            <!-- TANDA TANGAN DIGITAL -->
+            <!-- TANDA TANGAN DIGITAL MASUK -->
             <div class="card border mb-4 shadow-sm">
                 <div class="card-header py-3 bg-light border-bottom">
-                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-pen-fill text-primary me-2"></i>Tanda Tangan Digital</h5>
+                    <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-pen-fill text-primary me-2"></i>Tanda Tangan</h5>
                 </div>
                 <div class="card-body">
                     <div class="row g-2 text-center">
                         <div class="col-6">
                             <div class="border rounded p-2 bg-light">
-                                <div class="fw-semibold text-dark mb-1 small">Penyerah</div>
+                                <div class="fw-semibold text-dark mb-1 small">Penyerah (Awal)</div>
                                 <?php if (!empty($handover['sender_signature_path']) && file_exists(FCPATH . ltrim($handover['sender_signature_path'], '/\\'))): ?>
                                     <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/sender') ?>" alt="TTD Penyerah" class="img-fluid border rounded bg-white p-1" style="max-height: 80px;">
                                 <?php else: ?>
@@ -652,7 +812,7 @@ $condLabels = array(
 
                         <div class="col-6">
                             <div class="border rounded p-2 bg-light">
-                                <div class="fw-semibold text-dark mb-1 small">Penerima</div>
+                                <div class="fw-semibold text-dark mb-1 small">Penerima (Awal)</div>
                                 <?php if (!empty($handover['receiver_signature_path']) && file_exists(FCPATH . $handover['receiver_signature_path'])): ?>
                                     <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/receiver') ?>" alt="TTD Penerima" class="img-fluid border rounded bg-white p-1" style="max-height: 80px;">
                                 <?php else: ?>
@@ -664,6 +824,31 @@ $condLabels = array(
                     </div>
                 </div>
             </div>
+
+            <!-- TANDA TANGAN DIGITAL CHECKOUT (JIKA SUDAH CHECKOUT) -->
+            <?php if ($handover['checkout_status'] !== 'none'): ?>
+                <div class="card border mb-4 shadow-sm">
+                    <div class="card-header py-3 border-bottom">
+                        <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-pen-fill text-dark me-2"></i>Tanda Tangan Check-out</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2 text-center justify-content-center">
+                            <div class="col">
+                                <div class="border rounded p-3 bg-light">
+                                    <div class="fw-semibold text-dark mb-1 small">Kepala Ruangan</div>
+                                    <div class="text-muted mb-1" style="font-size:.75rem;">(Mengetahui)</div>
+                                    <?php if (!empty($handover['checkout_head_signature_path']) && file_exists(FCPATH . ltrim($handover['checkout_head_signature_path'], '/\\'))): ?>
+                                        <img src="<?= base_url('admin/media/signature/' . $handover['id'] . '/checkout_head') ?>" alt="TTD Kepala Ruangan" class="img-fluid border rounded bg-white p-1" style="max-height: 80px;">
+                                    <?php else: ?>
+                                        <p class="text-muted small mb-0">Belum ditandatangani</p>
+                                    <?php endif; ?>
+                                    <div class="mt-1 text-dark fw-bold small"><?= html_escape($handover['checkout_head_name'] ?: '') ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

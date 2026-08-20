@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= html_escape(isset($title) ? $title : 'Admin Portal') ?> - Sistem Inventaris RS</title>
+    <!-- built by itsKazor : https://github.com/itsKazor -->
 
     <!-- Bootstrap 5 CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -104,7 +105,7 @@ $_role_label = $_is_admin ? 'Administrator' : 'Kepala Ruangan';
                     <span><?= html_escape($this->session->userdata('admin_name') ? $this->session->userdata('admin_name') : 'Admin') ?></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm mt-2">
-                    <li><span class="dropdown-item-text text-muted small">Role: <?= html_escape($_role_label) ?></span></li>
+                    <li><span class="dropdown-item-text text-muted small">Peran: <?= html_escape($_role_label) ?></span></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-danger" href="<?= base_url('admin/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                 </ul>

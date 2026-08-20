@@ -41,6 +41,12 @@ class Media extends Admin_Controller {
             $path = $handover['receiver_signature_path'];
         } elseif ($type === 'acknowledgement' || $type === 'head') {
             $path = $handover['acknowledgement_signature_path'];
+        } elseif ($type === 'checkout_officer') {
+            $path = isset($handover['checkout_officer_signature_path']) ? $handover['checkout_officer_signature_path'] : '';
+        } elseif ($type === 'checkout_patient') {
+            $path = isset($handover['checkout_patient_signature_path']) ? $handover['checkout_patient_signature_path'] : '';
+        } elseif ($type === 'checkout_head') {
+            $path = isset($handover['checkout_head_signature_path']) ? $handover['checkout_head_signature_path'] : '';
         }
 
         if (empty($path)) {

@@ -143,6 +143,66 @@ class Handover_model extends CI_Model {
         return $this->db->update('handovers', $data);
     }
 
+    public function save_checkout($id, $checkout_data, $items) {
+        $this->db->trans_start();
+
+        $checkout_data['updated_at'] = date('Y-m-d H:i:s');
+        $checkout_data['checkout_completed_at'] = date('Y-m-d H:i:s');
+
+        $this->db->where('id', $id);
+        $this->db->update('handovers', $checkout_data);
+
+        if (!empty($items)) {
+            $now = date('Y-m-d H:i:s');
+            foreach ($items as $item_id => $item_val) {
+                $item_val['updated_at'] = $now;
+                $this->db->where('id', $item_id);
+                $this->db->where('handover_id', $id);
+                $this->db->update('handover_inventory_items', $item_val);
+            }
+        }
+
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
+    public function reset_checkout($id) {
+        $this->db->trans_start();
+
+        $checkout_data = array(
+            'checkout_date' => NULL,
+            'checkout_time' => NULL,
+            'checkout_officer_name' => NULL,
+            'checkout_patient_rep' => NULL,
+            'checkout_notes' => NULL,
+            'checkout_status' => 'none',
+            'checkout_officer_signature_path' => NULL,
+            'checkout_patient_signature_path' => NULL,
+            'checkout_head_signature_path' => NULL,
+            'checkout_head_name' => NULL,
+            'checkout_completed_at' => NULL,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('handovers', $checkout_data);
+
+        $item_reset = array(
+            'checkout_actual_qty' => NULL,
+            'checkout_difference_qty' => NULL,
+            'checkout_condition' => NULL,
+            'checkout_notes' => NULL,
+            'is_liability' => 0,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('handover_id', $id);
+        $this->db->update('handover_inventory_items', $item_reset);
+
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
     public function delete($id) {
         $this->db->trans_start();
         $this->db->where('handover_id', $id);

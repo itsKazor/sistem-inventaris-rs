@@ -4,7 +4,7 @@
     </div>
 
     <h2 class="fw-bold mb-1 text-dark">Serah Terima Berhasil Disimpan</h2>
-    <p class="text-muted mb-4">Dokumen transaksi serah terima inventaris telah tercatat resmi di database.</p>
+    <p class="text-muted mb-4">Dokumen transaksi serah terima inventaris telah tercatat di sistem.</p>
 
     <div class="card border bg-light mx-auto text-start mb-4 p-3" style="max-width: 650px;">
         <div class="row g-3">
@@ -28,14 +28,9 @@
     </div>
 
     <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <!-- PREVIEW BUTTON -->
+        <!-- PREVIEW + PRINT BUTTON -->
         <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>" target="_blank" class="btn btn-secondary btn-lg px-4 py-3 fw-bold shadow">
-            <i class="bi bi-file-earmark-pdf me-2 fs-5 align-middle text-warning"></i> Preview Dokumen PDF
-        </a>
-
-        <!-- PRINT BUTTON -->
-        <a href="<?= base_url('admin/handovers/preview/' . $handover['id']) ?>?print=1" target="_blank" class="btn btn-dark btn-lg px-4 py-3 fw-bold shadow">
-            <i class="bi bi-printer me-2 fs-5 align-middle"></i> Cetak / Print Bukti A4
+            <i class="bi bi-file-earmark-pdf me-2 fs-5 align-middle text-warning"></i> Lihat & Cetak Dokumen
         </a>
 
         <!-- NEW HANDOVER BUTTON -->
